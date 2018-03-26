@@ -17,7 +17,9 @@ public:
 	listDouble();
 	~listDouble();
 	int cantidad();
-	void addElement(int pos, int x);
+	void addElement(int x);
+	bool primo(int x);
+	void listDouble::print();
 };
 
 listDouble::listDouble()
@@ -49,41 +51,56 @@ int listDouble::cantidad()
 	return cant;
 }
 
-void listDouble::addElement(int pos, int x)
+void listDouble::addElement(int x)
 {
-	if (pos <= cantidad() + 1)
-	{
+	if (primo(x)) {
+		cout << "\nSolo se puede agregar numeros no primos.\n";
+	}
+	else {
 		Nodo *nuevo = new Nodo();
 		nuevo->info = x;
-		if (pos == 1)
-		{
-			nuevo->sig = raiz;
-			if (raiz != NULL)
-				raiz->ant = nuevo;
-			raiz = nuevo;
+		nuevo->sig = raiz;
+		if (raiz != NULL) {
+			raiz->ant = nuevo;
 		}
-		else
-			if (pos == cantidad() + 1)
-			{
-				Nodo *reco = raiz;
-				while (reco->sig != NULL)
-				{
-					reco = reco->sig;
-				}
-				reco->sig = nuevo;
-				nuevo->ant = reco;
-				nuevo->sig = NULL;
-			}
-			else
-			{
-				Nodo *reco = raiz;
-				for (int f = 1; f <= pos - 2; f++)
-					reco = reco->sig;
-				Nodo *siguiente = reco->sig;
-				reco->sig = nuevo;
-				nuevo->ant = reco;
-				nuevo->sig = siguiente;
-				siguiente->ant = nuevo;
-			}
+		raiz = nuevo;
 	}
+}
+
+bool listDouble::primo(int x) {
+	bool flag = false,flag2=false;
+	int aux = x;
+		if (x != 1)
+		{
+			aux = aux - 1;
+		}
+		do{
+			if (x % aux != 0) {
+				aux = aux - 1;
+				flag2 = true;
+			}
+			else {
+				if (aux==1)
+				{
+					flag = true;
+				}
+				else {
+					flag = false;
+				}
+				flag2 = false;
+			}
+		} while (flag2);
+	return flag;
+}
+
+void listDouble::print()
+{
+	Nodo *rec = raiz;
+	cout << "\nListado completo.\n";
+	while (rec != NULL)
+	{
+		cout << rec->info << "-";
+		rec = rec->sig;
+	}
+	cout << "\n";
 }

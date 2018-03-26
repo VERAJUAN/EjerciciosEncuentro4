@@ -4,25 +4,27 @@
 #include "stdafx.h"
 #include <iostream>
 #include "e3.h"
+#include "nodo.h"
 using namespace std;
 
 int main()
 {
 	bool flag = true;
+	listDouble list;
 	do{
 		int option, x = 1, y = 2;
 		int *p1 = &x, *p2 = &y;
-		int &p3 = x, &p4 = y;
+		int &p3 = x, &p4 = y;		
 		int indice[] = { 1,2,3,4,5,6,7,8,9,10 };
 		int *ptr = indice; //Faltó inicializar, en este caso por indice.
 
 	
-		cout << "\nMenú:\n1- Explicado en el ReadMe.txt\n2- Impresion de true.\n3- Funcion swap.\n4- Agregar elementos a la lista.\nIngresar opcion:\n";
+		cout << "\nMenu:\n1- Explicado en el ReadMe.txt\n2- Impresion de true.\n3- Funcion swap.\n4- Agregar elementos a la lista.\nIngresar opcion:\n";
 		cin >> option;
 		switch (option)
 		{
 		case 1:
-			cout << "Explicado en ReadMe.txt";
+			cout << "\nExplicado en ReadMe.txt\n";
 			break;
 		case 2:		
 			ptr++;
@@ -40,7 +42,10 @@ int main()
 			swap_2(p3, p4);
 			break;
 		case 4:
-			
+			cout << "\nIngresar numero entero no primo a agregar a la lista.\n";
+			cin >> option;
+			list.addElement(option);
+			list.print();
 			break;
 
 		case 0:
